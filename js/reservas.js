@@ -120,7 +120,7 @@ function funcionMes () {
     } while (otraReserva)
 }
 
-// Eleccion de los dias llamado por el ciclo, segun el mes elegido
+// Eleccion de los dias llamado por el ciclo, segun el mes elegido.
 function elegirDias() {
     
     // Definicion de mensajes reutilizables para inicio y fin de la reserva
