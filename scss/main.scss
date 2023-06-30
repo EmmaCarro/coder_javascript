@@ -1,0 +1,10 @@
+// Para organizacion absoluta, este main.scss solo tiene imports
+// Los imports estan en un orden especifico de mayor a menor para que no se generen problemas
+
+@import "layouts/_variables";
+@import "layouts/_global";
+@import "layouts/_header";
+@import "vistas/_home";
+@import "vistas/_article";
+@import "layouts/_footer";
+@import "layouts/_responsive";

@@ -1,0 +1,218 @@
+// RESPONSIVE
+
+@media (max-width: 810px) {
+
+    // RESPONSIVE TARJETA PAGINA HOME 810px
+    .contenedor_tarjeta {
+        @include templateFlex(space-evenly, center, true);
+    }
+
+    .tarjeta {
+        margin-bottom: 5%;
+
+        &__contenido{
+            min-height: fit-content;
+        }
+    }
+
+    // RESPONSIVE SEPARADOR CUBOS 810px
+    .separador_cubos {
+        &__titulo {
+            font-size: 28px;
+        }
+        &__texto {
+            font-size: 16px;
+        }
+    }
+
+    // RESPONSIVE SEPARADOR FRASE 810px
+    .separador_frase-frase {
+        white-space: nowrap;
+    }
+
+    .separador_frase-linea {
+        display: none;
+    }
+    
+    // RESPONSIVE FORMULARIO 810px
+    fieldset {
+        min-width: 500px;
+
+        & label {
+            display: inline-block;
+        }
+
+        & select {
+            display: inline-block;
+        }
+      }
+
+    input {
+        display: inline-block;
+        max-width: 150px;
+    }
+
+    .desdehasta {
+        display: inline-block;
+    }
+
+    // RESPONSIVE SUBTITULO 810px
+    .subtitle {
+        font-size: 18px;
+    }
+
+    // RESPONSIVE TARJETA PAGINA DE ARTICULOS 810px
+    .tarjetav__tablelarge {
+        table-layout: fixed;
+        width: 100%;
+
+        & th {
+            font-size: 13px;
+            font-style: bold;
+        }
+    }
+
+    .contenedor_tarjetav {
+        @include templateFlex(center, center, true);
+    }
+
+    .tarjetav {
+        margin-bottom: 5%;
+    }
+
+    // RESPONSIVE GRID IMAGENES 810px
+    .contenedor_imagenes {
+        @include templateGrid(2, auto, 3, auto, 5%);
+        min-height: max-content;
+        margin: 10% auto 10% auto;
+
+        &--img img{
+            max-width: auto;
+            max-height: 415px;
+        }
+    }
+
+    // RESPONSIVE FOOTER 810px
+    .footer__links {
+        padding: 0%;
+    }
+
+    // AGUA DE SEPARADOR DE CIRCULOS
+    .container-fluid {
+        &:before {
+            bottom: 11vh;
+        }
+    
+        &:after {
+            bottom: 8vh;
+        }
+    }
+}
+
+
+
+@media (max-width: 540px) {
+
+    // RESPONSIVE HERO 540px
+    .carousel-caption p {
+        font-size: 22px;
+    }
+    
+    // RESPONSIVE SEPARADOR CUBOS 540px
+    .separador_cubos {
+        @include templateFlex(center, center, true);
+        margin: 0 auto;
+    }
+
+    // RESPONSIVE BREADCRUMBS 540px
+    .breadcrumbs {
+        display: none;
+    }
+
+    // RESPONSIVE FORMULARIO 540px
+    fieldset {
+        min-width: 350px;
+
+        & div {
+          max-width: 330px;
+        }
+      }
+
+    input {
+        max-width: 100%;
+
+        &[type="date"] {
+            max-width: 30%;
+        }
+    }
+
+    // RESPONSIVE SUBTITULO 540px
+    .subtitle {
+        display: none;
+    }
+
+    // RESPONSIVE TARJETA DE VIDEOS 810px
+    .tarjetav__tablelarge {
+        table-layout: fixed;
+        width: 100%;
+
+        & th {
+            font-size: 9px;
+            font-style: bold;
+        }
+    }
+
+    .tarjetav__table th {
+        font-size: 9px;
+        font-style: bold;
+    }
+    
+    // RESPONSIVE GRID DE IMAGENES 540px
+    .contenedor_imagenes {
+        @include templateGrid(1, auto, auto, 1fr, 10px);
+        margin: 10% auto 10% auto;
+
+        &--img img{
+            max-width: auto;
+            max-height: 315px;
+        }
+    }
+
+    // RESPONSIVE HEADER 540px
+    .navbar {
+        display: none;
+    }
+  
+    .hamburger-menu {
+        display: block;
+    }
+
+    // RESPONSIVE FOOTER 540px
+    .footer__links {
+        padding-left: 15%;
+        margin-bottom: 10%;
+
+        & a{
+            @include templateFlex(flex-start, flex-start, true);
+        }
+    }
+
+    .footer__redes {
+        padding-left: 15%;
+    }
+
+    .pie {
+        @include templateFlex(center, flex-start, true);
+    }
+
+    // AGUA DE SEPARADOR DE CIRCULOS
+    .container-fluid {
+        &:before {
+            bottom: 8vh;
+        }
+    
+        &:after {
+            bottom: 5vh;
+        }
+    }
+}

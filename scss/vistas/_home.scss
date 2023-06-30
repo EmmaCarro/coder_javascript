@@ -1,0 +1,271 @@
+/* HOME */
+/* HERO */
+.carousel-caption {
+    top: 50%;
+    transform: translateY(-50%);
+    bottom: initial;
+
+    font-weight: 300;
+    font-size: 28px;
+    margin: 0 0 0 0;
+
+    & h1 {
+        text-shadow: 1px 1px 10px $colorH;
+    }
+
+    & p {
+        text-shadow: 0px 0px 5px black;
+    }
+}
+
+
+/* HOME */
+/* SEPARADOR DEBAJO DEL BANNER */
+/* Contenedor de todo el separador */
+.separador_frase {
+    background-color: $color2;
+    background-image: radial-gradient($color2, $colorF 60% 80%);
+    min-height: 200px;
+
+    @include templateFlex(space-evenly, center, false);
+    padding: 0 20% 0 20%;
+    flex-wrap: nowrap;
+
+    /* Texto del separador */
+    &-frase {
+        font-weight: 300;
+        font-style: italic;
+        font-size: 18px;
+        color: coral;
+        opacity: 75%;
+    }
+
+    /* Lineas que acompañan el texto */
+    &-linea {
+        width: 20%;
+        border: 1px solid coral;
+        opacity: 25%;
+    }
+}
+
+
+/* HOME */
+/* FRASES INFORMATIVAS EN 4 CUBOS */
+/* contenedor de cubos */
+.separador_cubos {
+    @include templateGrid(2, 1fr, 1, 1fr, 0%);
+    margin: 0 auto;
+
+    /* Cubos en general */
+    & div {
+        @include templateFlex(center, center, false);
+        flex-wrap: wrap;
+        height: auto;
+    }
+
+    /* Cubo de titulo */
+    &__titulo {
+        background-color: $color1;
+        font-weight: 100;
+        font-size: 30px;
+        color: azure;
+        text-align: center;
+        padding: 7%;
+        min-width: 100%;
+    }
+
+    /* Cubo de texto */
+    &__texto {
+        background-color: honeydew;
+        font-weight: 200;
+        font-size: 18px;
+        text-align: center;
+        padding: 7%;
+    }
+}
+
+
+/* HOME */
+/* TARJETAS DESTACADOS */
+.contenedor_tarjeta {
+    @include templateFlex(space-evenly, top, false);
+    padding: 5% 1% 5% 1%;
+    background-color: $colorF;
+}
+
+.tarjeta {
+    max-width: fit-content;
+    min-width: auto;
+
+    /* Solapa "Destacado" arriba de cada tarjeta */
+    &__label {
+        color:$color1;
+        background-color: honeydew;
+        border: solid 2px;
+        border-radius: 10px;
+        border-color: $colorH;
+        margin-bottom: 1px;
+        max-width: fit-content;
+        min-width: auto;
+        padding: 5px;
+    }
+    
+    /* DIV que engloba la imagen, titulo y texto de la tarjeta */
+    &__contenido {
+        @include templateFlex(space-evenly, center, true);
+        background-color: powderblue;
+        border-radius: 10px;
+        padding: 1em;
+        min-height: 462px;
+        box-shadow: 5px 5px 25px 3px rgba(0,0,0,0.40);
+
+        width: fit-content;
+        min-width: auto;
+    }
+    
+    /* Imagen del articulo destacado */
+    &__contenido--imagen1 {
+        background-image: url(../images/kika/1.jfif);
+        background-repeat: no-repeat;
+        background-size: cover;
+        background-position: center left;
+        border-radius: 10px;
+        min-width: 300px;
+        min-height: 200px;
+        color: transparent;
+    }
+    &__contenido--imagen2 {
+        background-image: url(../images/rosita/8.jfif);
+        background-repeat: no-repeat;
+        background-size: cover;
+        background-position: center left;
+        border-radius: 10px;
+        min-width: 300px;
+        min-height: 200px;
+        color: transparent;
+    }
+    
+    /* Titulo del articulo destacado */
+    &__contenido--titulo {
+        font-size: 18px;
+        font-weight: 600;
+        font-style: bold;
+        color:$colorL;
+        margin: 2% 0 2% 0;
+    }
+    
+    /* Texto del articulo destacado */
+    &__contenido--texto {
+        font-size: 12px;
+        font-weight: 500;
+        max-width: 300px;
+    
+        margin-bottom: 5%;
+    }
+    
+    /* Boton VER de la tarjeta */
+    &__contenido--boton {
+        color: slategrey;
+        background-color: azure;
+        border: 1px solid transparent;
+        border-radius: 10px;
+        padding: 5px;
+    
+        max-width: fit-content;
+        min-width: auto;
+    
+        margin: auto 1% 1% auto;
+    }
+}
+
+
+/* HOME */
+/* SEPARADOR "DE CIRCULOS" ANTES DE FOOTER */
+.container-fluid {
+    // @include templateGrid(3, 1fr, 1, 1fr, 0%);
+    margin: auto;
+    padding: 10% 5% 7% 5%;
+    background-color: $color2;
+    background-image: linear-gradient($colorF, $acuoso 20% 100%);
+
+    /* Contenedores de cada imagen y texto del separador */
+    // &__combo {    
+    //     @include templateFlex(space-evenly, center, true);
+    // }
+    
+    /* Imagenes del separador antes del footer */
+    & img {
+        max-height: 50px;
+        max-width: 50px;
+        border-radius: 50%;
+        opacity: 70%;
+        filter: grayscale(50%);
+    }
+    
+    /* Texto del separador antes del footer */
+    & h4 {
+        position: relative;
+        font-weight: 300;
+        font-style: italic;
+        font-size: 18px;
+        text-align: center;
+        margin-top: 5%;
+    }
+}
+
+
+/* ANIMACIONES */
+/* Boton de la tarjeta */
+.tarjeta__contenido--boton {
+    transition: all 0.2s ease;
+
+    &:hover {
+        border: 1px solid $colorL;
+        background-color: $color2;
+        transition: all 0.2s ease;
+    }
+
+    &:active {
+        border: 1px solid $colorH;
+        background-color: white;
+        color: $colorH;
+        transition: all 0.2s ease;
+    }
+}
+
+
+// AGUA DEL SEPARADOR DE CIRCULOS
+.container-fluid {
+    position: relative;
+    overflow: hidden;
+    background-color: transparent;
+
+    &:before, &:after {
+        content: "";
+        position: absolute;
+        left: 50%;
+        min-width: 300vw;
+        min-height: 300vw;
+        background-color: $colorF;
+        animation: rotacion infinite;
+    }
+  
+    &:before {
+        bottom: 13vh;
+        border-radius: 45%;
+        animation-duration: 10s;
+    }
+  
+    &:after {
+        bottom: 10vh;
+        opacity: .5;
+        border-radius: 47%;
+        animation-duration: 10s;
+    }
+}
+
+@keyframes rotacion {
+  0% {transform: translate(-50%, 0) rotateZ(0deg);}
+  50% {transform: translate(-50%, -2%) rotateZ(180deg);}
+  100% {transform: translate(-50%, 0%) rotateZ(360deg);}
+}
