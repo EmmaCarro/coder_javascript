@@ -1,0 +1,44 @@
+/*  */
+/* GENERAL */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    scroll-behavior: smooth;
+
+    /* Sacarle el subrayado a los links */
+    text-decoration: none;
+}
+
+/* Tipografia general */
+body {
+    font-family: 'Quicksand', sans-serif;
+    font-weight: 400;
+    background-image: linear-gradient(90deg, beige, blanchedalmond 15% 85%, beige);
+    max-width: 1320px;
+    margin: 0 auto;
+}
+
+/* Sacarle mas subrayado a los links porque Bootstrap los vuelve a meter */
+a:link, a:visited, a:hover, a:active {
+    text-decoration: none;
+}
+
+
+// MIXINS
+@mixin templateFlex($justify, $align, $column) {
+    display: flex;
+    justify-content: $justify;
+    align-items: $align;
+    
+    @if ($column == true) {
+        flex-direction: column;
+    }
+}
+
+@mixin templateGrid($reps, $cols, $reps2, $rows, $gap) {
+    display: grid;
+    grid-template-columns: repeat($reps, $cols);
+    grid-template-rows: repeat($reps2, $rows);
+    gap: $gap;
+}

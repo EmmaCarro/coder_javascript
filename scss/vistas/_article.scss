@@ -1,0 +1,268 @@
+/* TODAS LAS PAGINAS EXCEPTO HOME */
+/* Navegacion o breadcrumbs */
+.breadcrumb {
+    margin: 1% auto 1% 0;
+    color: grey;
+
+    & a {
+        color: $colorL;
+    }
+}
+
+
+/* PAGINAS DE ARTICULOS */
+/* Titulo */
+.title {
+    color: $colorL;
+    margin: 5% auto 1% auto;
+    text-align: center;
+}
+
+/* Subtitulo */
+.subtitle {
+    color: darkseagreen;
+    margin: 1% auto 5% auto;
+    text-align: center;
+}
+
+
+/* GALERIA - VIDEOS */
+/* Tarjetas de videos */
+.contenedor_tarjetav {
+    @extend .contenedor_tarjeta;
+    @include templateGrid(2, 1fr, 1, 1fr, 3%);
+    justify-items: center;
+}
+
+.tarjetav {
+    @extend .tarjeta;
+
+    /* DIV que engloba la imagen, titulo y texto de la tarjeta */
+    &__contenido {
+        @extend .tarjeta__contenido;
+
+        min-height: 610px;
+        max-width: 500px;
+    }
+
+    /* Imagen del articulo destacado */
+    &__contenido--video {
+        border-radius: 10px;
+        min-width: 100%;
+        min-height: 300px;
+        margin: 3% 0 3% 0;
+    }
+
+    /* Titulo del articulo destacado */
+    &__contenido--titulo {
+        @extend .tarjeta__contenido--titulo;
+
+        font-size: 22px;
+        margin: 2% 0 4% 0;
+        text-align: center;
+    }
+
+    /* Texto del articulo destacado */
+    &__contenido--texto {
+        @extend .tarjeta__contenido--texto;
+
+        max-width: fit-content;
+        padding: 0 auto;
+        margin: 1em 1px 2em 1px;
+    }
+
+    /* Boton link de cada tarjeta */
+    &__contenido--boton {
+        @extend .tarjeta__contenido--boton;
+        
+        margin: auto 1% 0 auto;
+        border: 1px solid $colorL;
+    }
+
+    /* Tabla de estadisticas arriba del video */
+    &__table {
+        border: 0px;
+        font-size: 11px;
+        text-align: center;
+        background: linear-gradient(90deg, rgba(36,11,111,0) 0%, paleturquoise 5% 95%, rgba(0,0,0,0) 100%);
+        min-width: 100%;
+    }
+
+    /* Tabla de estadisticas arriba de mapa e imagenes */
+    &__tablelarge {
+        border: 0px;
+        font-size: 16px;
+        text-align: center;
+        background: linear-gradient(90deg, rgba(36,11,111,0) 0%, $color2 5% 95%, rgba(0,0,0,0) 100%);
+        width: 100%;
+        margin: 4% auto auto auto;
+    }
+}
+
+/* GALERIA - IMAGENES */
+/* Seccion contenedora de imagenes */
+.contenedor_imagenes {
+    @include templateGrid(3, auto, 2, auto, 5%);
+    padding: 3%;
+    justify-items: center;
+    align-items: center;
+    min-height: auto;
+    overflow: visible;
+    margin: 2% 0 5% 0;
+
+    /* Imagenes del contenedor de imagenes */
+    &--img {
+        overflow: auto;
+        border-radius: 5%;
+        border: 1px solid grey;
+        box-shadow: 5px 5px 25px 3px rgba(0,0,0,0.40);
+    
+        @include templateFlex(center, center, false);
+    }
+    
+    &--img img{
+        max-width: 310px;
+        max-height: 415px;
+        height: 100%;
+        width: 100%;
+        object-fit: cover;
+    }
+}
+
+
+/* Mapa de la seccion galeria imagenes */
+.mapachico {
+    min-width: 100%;
+    min-height: 300px;
+}
+
+
+/* SECCION MAPA */
+/* Mapa de la seccion Mapa */
+.mapagrande {
+    min-width: 100%;
+    min-height: 600px;
+    margin-bottom: 5%;
+}
+
+/* SECCION CONTACTO */
+form {
+    min-width: max-content;
+    @include templateFlex(center, center, false);
+    margin-bottom: 5%;
+}
+
+fieldset {
+    min-width: 600px;
+    display: block;
+    margin: 1%;
+    padding: 1%;
+    border: 1px solid gray;
+    border-radius: 10px;
+    background-color: rgba(255, 250, 205, 0.5);
+
+    & div {
+      margin-bottom: 2%;
+    }
+
+    & label {
+      display: inline-block;
+      margin: 1%;
+    }
+  
+    & select {
+      display: inline-block;
+      margin: 1%;
+      border: 1px solid transparent;
+      border-radius: 10px;
+      padding: 1%;
+    }
+  
+    & button {
+      color: slategrey;
+      background-color: azure;
+      border: 1px solid $colorL;
+      border-radius: 10px;
+      padding: 5px;
+  
+      max-width: fit-content;
+  
+      margin: 2%;
+    }
+  }
+
+  legend {
+    background-color: $color2;
+    color: gray;
+    padding: 5px;
+    border-radius: 3%;
+    border: 1px solid gray;
+    border-radius: 10px;
+  }
+
+  input {
+    display: inline-block;
+    margin: 1%;
+    border: 1px solid transparent;
+    border-radius: 10px;
+    padding: 1%;
+  }
+
+
+  
+/* ANIMACIONES */
+/* Boton de la tarjeta */
+.tarjetav__contenido--boton {
+    transition: all 0.2s ease;
+    &:hover {
+        border: 1px solid $colorL;
+        background-color: $color2;
+        transition: all 0.2s ease;
+    }
+    &:active {
+        border: 1px solid $colorH;
+        background-color: white;
+        color: $colorH;
+        transition: all 0.2s ease;
+    }
+}
+
+/* Breadcrumbs links */
+.breadcrumb-item {
+    border-radius: 15%;
+    background-color: transparent;
+    
+    &:hover {
+        border-radius: 15%;
+        color: $colorL;
+        transition: all 0.2s ease;
+    }
+}
+
+/* Boton de formulario contacto */
+fieldset button {
+    transition: all 0.2s ease;
+    &:hover {
+        border: 1px solid $colorL;
+        background-color: $color2;
+        transition: all 0.2s ease;
+    }
+    &:active {
+        border: 1px solid $colorH;
+        background-color: white;
+        color: $colorH;
+        transition: all 0.2s ease;
+    }
+}
+
+/* Espacios a rellenar de formulario contacto */
+input:focus {
+    outline: none;
+    border: 1px solid $colorH;
+    transition: all 1s;
+}
+select:focus {
+    outline: none;
+    border: 1px solid $colorH;
+    transition: all 1s;
+}
