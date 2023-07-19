@@ -136,7 +136,7 @@ let mensajeTotal = "";
 // elegirMes = "";
 
 // alerta de bienvenida donde dice el precio por noche, llamamos al .nombre del usuario registrado en el indice [0] del array usuariorray
-alert("¡Hola " + usuariorray[0].nombre + "!\nLa estadia actual por noche es de $" + fijo + "\nAhora continuemos hacia su reserva...")
+alert("¡Hola " + usuariorray[0].nombre + "!\nTu estadia actual por noche es de $" + fijo + "\nAhora continuemos hacia su reserva...")
 
 
 // Ciclo que repite la reserva
