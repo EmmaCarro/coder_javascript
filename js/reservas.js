@@ -1,68 +1,96 @@
 // BIENVENIDA
 alert ("Bienvenido a VeranoFeel Reservas. A continuacion le pediremos datos de contacto y luego podrá elegir sus reservas.")
 
-
 // INGRESAR DATOS DE CONTACTO
 
-// Declaracion de la operacion de datos de contacto completa para el bucle entero
-let operacionDatos = false
+let operacionDatos = false  // definicion para hacer bucle con el confirm
+let usuariorray = [];   //array vacio para llenarlo con datos del usuario en el bucle
 
-// Declaracion de Nombre
-let nombre = prompt ("Ingrese su nombre");
+// clase constructora para crear objeto con los datos
+class Usuario {
+    constructor (nombre, email, telefono, adultos, ninios, mascotas) {
+        this.nombre = nombre;
+        this.email = email;
+        this.telefono = telefono;
+        this.adultos = adultos;
+        this.ninios = ninios;
+        this.mascotas = mascotas;
+  }
+}
+// alerta reusable para prompts mal ingresados
+function alertaDatoInvalido() {
+    alert("Ingrese un dato válido");
+}
 
-// Chequeo de error del nombre... mientras nombre sea nada, null o un numero, se repite el while
-while ((nombre == "") || (nombre === null) || (Number(nombre)) ) {
-    alert ("Ingrese un nombre valido");
-    nombre = prompt ("Ingrese su nombre");
+do {  // Inicio del bucle global
+
+    let nombre;
+    let email;
+    let telefono;
+    let adultos;
+    let ninios;
+    let mascotas;
+
+    // Bucles individuales para cada dato
+    while (true) {
+        nombre = prompt("Ingrese su nombre:");
+        if (/^[a-zA-Z]+$/.test(nombre)) {
+        break;
+        }
+        alertaDatoInvalido();
+    };
+
+    while (true) {
+        email = prompt("Ingrese su email. Debe ser un email valido:");
+        if (/^[\w.-]+@[\w.-]+\.\w+$/.test(email)) {
+        break;
+        }
+        alertaDatoInvalido();
+    };
+    
+    while (true) {
+        telefono = parseInt(prompt("Ingrese su numero de contacto:"));
+        if (/^\d+$/.test(telefono)) {
+        break;
+        }
+        alertaDatoInvalido();
+    };
+
+    while (true) {
+        adultos = parseInt(prompt("Ingrese cantidad de adultos:"));
+        if (/^\d+$/.test(adultos)) {
+        break;
+        }
+        alertaDatoInvalido();
+    };
+
+    while (true) {
+        ninios = parseInt(prompt("Ingrese cantidad de menores:"));
+        if (/^\d+$/.test(ninios)) {
+        break;
+        }
+        alertaDatoInvalido();
+    };
+
+    while (true) {
+        mascotas = parseInt(prompt("Ingrese cantidad de mascotas:"));
+        if (/^\d+$/.test(mascotas)) {
+        break;
+        }
+        alertaDatoInvalido();
+    };
+
+// Verificacion de todos los datos ingresados. Negarlo reinicia el bucle. Aceptarlo ejecuta el if siguiente.
+operacionDatos = confirm("¿Son estos datos correctos?" + "\nNombre: " + nombre + "\nEMail: " + email + "\nTelefono: " + telefono + "\nAdultos: " + adultos + "\nNiños: " + ninios + "\nMascotas: " + mascotas );
+
+// if para agregar datos al array con un .push si se confirma el confirm anterior
+if (operacionDatos) {
+    usuariorray.push(new Usuario(nombre, email, telefono, adultos, ninios, mascotas));
+    console.log("Usuario registrado: ", usuariorray[0]);
 };
 
-// Inicio de un bucle global para verificacion de datos de contacto ingresados (abarca todo el ingreso de datos de contacto y sus while)
-do {
+} while (!operacionDatos || (operacionDatos == null) || (operacionDatos == "ESC"));  // Fin del bucle
 
-// Declaracion de email
-let email = prompt ("Ingrese su e-mail");
-
-// Chequeo de error de email... funcionamiento igual al de chequeo error de nombre
-while ((email == "") || (email === null) || (Number(email)) ) {
-    alert ("Ingrese un email valido");
-    email = prompt ("Ingrese su email");
-};
-
-// Declaracion de telefono
-let telefono = parseInt ( prompt ("Ingrese su numero de contacto"));
-
-// Chequeo de error de telefono... funcionamiento igual al chequeo de error de edad
-while ( (telefono == "") || (telefono == null) || (Number.isNaN(Number(telefono))) ) {
-    alert ("Ingrese un telefono valido");
-    telefono = parseInt ( prompt ("Ingrese su numero de contacto"));
-};
-
-// Declaracion de adultos
-let adultos = parseInt ( prompt ("Ingrese cantidad de adultos"));
-
-// Chequeo de error de edad... mientras edad sea nada, null, no un numero (NaN), menor o igual a 17, mayor o igual a 100, se repite el while
-while ( (adultos == "") || (adultos == null) || (Number.isNaN(Number(adultos))) ) {
-    alert ("Ingrese una cantidad valida");
-    adultos = parseInt ( prompt ("Ingrese cantidad de adultos"));
-};
-
-// Declaracion de niños
-let ninios = parseInt ( prompt ("Ingrese cantidad de niños"));
-
-// Chequeo de error de edad... mientras edad sea nada, null, no un numero (NaN), menor o igual a 17, mayor o igual a 100, se repite el while
-while ( (ninios == "") || (ninios == null) || (Number.isNaN(Number(ninios))) ) {
-    alert ("Ingrese una cantidad valida");
-    ninios = parseInt ( prompt ("Ingrese cantidad de niños"));
-};
-
-// Verificacion de datos ingresados... muestra los datos, y junto al fin del -do while- global debajo y la declaracion operacionDatos = false al principio, confirmar finaliza el -do while- completo, y cancelar lo repite
-operacionDatos = confirm("¿Son estos datos correctos?" + "\nNombre: " + nombre + "\nEMail: " + email + "\nTelefono: " + telefono + "\nAdultos: " + adultos + "\nNiños: " + ninios )
-
-// Registro de consola para imprimir datos ingresados
-console.log ( "Usuario registrado como:" + "\nNombre: " + nombre + "\nEMail: " + email + "\nTelefono: " + telefono + "\nAdultos: " + adultos + "\nNiños: " + ninios );
-
-// Fin del bucle de datos de contacto completo (abarca todo el ingreso de datos de contacto y sus while)
-} while ((operacionDatos == false) || (operacionDatos == null) || (operacionDatos == "ESC"));
 
 
 // MENU DE RESERVAS INTERACTIVO
@@ -71,138 +99,131 @@ console.log ( "Usuario registrado como:" + "\nNombre: " + nombre + "\nEMail: " +
 let otraReserva = false;
 
 // reserva inicial debe ser siempre 0 pesos porque no tenemos base de datos
-var reserva = 0;
-var reservaTotal = 0;
+let reserva = 0;
+let reservaTotal = 0;
 
 // se definen los numeros de inicio y fin de reserva a elegir en blanco
-var eneInicial = 0;
-var eneFinal = 0;
+// var eneInicial = 0;
+// var eneFinal = 0;
 
-var febInicial = 0;
-var febFinal = 0;
+// var febInicial = 0;
+// var febFinal = 0;
 
-// Se definen dias de inicio y fin totales como numeros que van a ser usados para saber si hay reservas anteriores. Se los define al reves para dar espacio a los dias de cada mes en el calculo del switch
-let eneInicialTotal = 32;
-let eneFinalTotal = 0;
-let febInicialTotal = 29;
-let febFinalTotal = 0;
+// Se reemplazaron definiciones individuales por un array de objetos para cada mes del año
+// Se definen dias de inicio y fin totales como numeros que van a ser usados para saber si hay reservas anteriores
+// Se los define al reves para dar espacio a los dias de cada mes en el calculo de los whiles
+const meses = [
+    { nombre: "ENERO", dias: 31, inicialTotal: 32, finalTotal: 0 },
+    { nombre: "FEBRERO", dias: 28, inicialTotal: 29, finalTotal: 0 },
+    { nombre: "MARZO", dias: 31, inicialTotal: 32, finalTotal: 0 },
+    { nombre: "ABRIL", dias: 30, inicialTotal: 31, finalTotal: 0 },
+    { nombre: "MAYO", dias: 31, inicialTotal: 32, finalTotal: 0 },
+    { nombre: "JUNIO", dias: 30, inicialTotal: 31, finalTotal: 0 },
+    { nombre: "JULIO", dias: 31, inicialTotal: 32, finalTotal: 0 },
+    { nombre: "AGOSTO", dias: 31, inicialTotal: 32, finalTotal: 0 },
+    { nombre: "SEPTIEMBRE", dias: 30, inicialTotal: 31, finalTotal: 0 },
+    { nombre: "NOVIEMBRE", dias: 30, inicialTotal: 31, finalTotal: 0 },
+    { nombre: "DICIEMBRE", dias: 31, inicialTotal: 32, finalTotal: 0 },
+];
 
-// se definen el precio final total, y uno fijo que se usa en la alerta
-var precio = 8000;
+// se definen el precio final total, modificable al agregar mas reservas, y uno fijo que se usa en la alerta
+let precio = 8000;
 const fijo = 8000;
 
 // Definiciones para evitar errores
-mensajeReserva = "";
-mensajeTotal = "";
-elegirMes = "NINGUNO";
+let mensajeReserva = "";
+let mensajeTotal = "";
+// elegirMes = "";
 
-// alerta de bienvenida donde dice el precio por noche
-alert("¡Hola " + nombre + "!\nLa estadia actual por noche es de $" + fijo + "\nAhora continuemos hacia su reserva...")
+// alerta de bienvenida donde dice el precio por noche, llamamos al .nombre del usuario registrado en el indice [0] del array usuariorray
+alert("¡Hola " + usuariorray[0].nombre + "!\nLa estadia actual por noche es de $" + fijo + "\nAhora continuemos hacia su reserva...")
+
 
 // Ciclo que repite la reserva
 function funcionMes () {
     do {
-        // Elegi hacer solo enero y febrero para agregar un switch, y porque se lo considera la temporada de verano para los alquileres en la costa
-        elegirMes = prompt("Elija el mes donde sera la reserva. Escriba 'ENERO' o 'FEBRERO' a continuacion:")
+
+        // Se definen variables a usar, comenzando mesValido como falso
+        let elegirMes;
+        let mesValido = false;
+
+        // Se pide ingresar el mes a reservar dentro del while para que inicie en bucle si el resultado es falso (empieza en falso)
+        while (!mesValido) {
+            // este prompt debe ir en toUpperCase porque el .nombre del array es todo uppercase
+            elegirMes = prompt("Escriba el mes en el que desea hacer la reserva a continuacion:").toUpperCase();
+            
+            // se usa el metodo .some para verificar que el nombre sea valido
+            mesValido = meses.some((mes) => mes.nombre === elegirMes);
+
+            // se agrega un if para dar una alerta si el resultado es falso. Se movio la funcion mensajes hasta aca
+            if (!mesValido) {
+            errorMes = elegirMes + " no es un mes valido. Por favor ingrese un nombre de mes valido."
+            mensajes(errorMes,errorMes);
+            }
+        }
         
-        // Este if evita el error que daria ejecutar la funcion elegirDias habiendo cancelado el prompt elegirMes anterior, dando el resultado de NULL
-        if (elegirMes == "enero" || elegirMes == "febrero") {
-            // se ejecuta a continuacion la funcion de elegir los dias con el dato del mes que se dio anteriormente
-            elegirDias();
-                                    
-            // si se confirma se repite el ciclo de la reserva
-            otraReserva = confirm("¿Desea realizar otra reserva?")
-        } else {                                    
-            // si se confirma se repite el ciclo de la reserva
-            otraReserva = confirm("Error en los datos ingresados. ¿Reiniciar?")
+        // usando find para encontrar el .nombre del mes que sea igual al prompt anterior
+        const mesSeleccionado = meses.find ( (mes) => mes.nombre === elegirMes );
+
+        // se ejecuta un bucle con la funcion de elegir los dias del mes
+        if (mesSeleccionado) {
+            elegirDias(mesSeleccionado);
+        } else {                 
+            otraReserva = confirm("Error en los datos ingresados. ¿Reiniciar?");
         }
 
-    } while (otraReserva)
+        otraReserva = confirm("¿Desea realizar otra reserva?");
+    } while (otraReserva);
 }
 
-// Eleccion de los dias llamado por el ciclo, segun el mes elegido.
-function elegirDias() {
+// Eleccion de los dias llamado por el ciclo, segun el mes elegido
+function elegirDias(mes) {
     
-    // Definicion de mensajes reutilizables para inicio y fin de la reserva
-    mensajeReserva = "";
-    mensajeInicio = "Reservando en mes de " + elegirMes + "\n\nIngrese el dia de inicio de su reserva:";
-    mensajeFin = "Reservando en mes de " + elegirMes + "\n\nIngrese el dia final de su reserva:";
-    mensajeMalInicio = "El dia de reserva inicial de " + elegirMes + " ingresado no es valido.";
-    mensajeMalFinal = "El dia de reserva final de " + elegirMes + " ingresado no es valido."
+    // Definicion de mensajes reutilizables para inicio y fin de la reserva. Se eliminaron un par redundantes para acortar codigo gracias al array
+    const mensajeInicio = `Reservando en mes de ${mes.nombre} \n\nIngrese el dia de inicio de su reserva:`;
+    const mensajeFin = `Reservando en mes de ${mes.nombre} \n\nIngrese el dia final de su reserva:`;
     
-    switch (elegirMes.toLowerCase()) {
-        case "enero":
-            // se pide el numero de dia inicial a reservar
-            eneInicial = Number.parseInt(prompt(mensajeInicio));
-            
-            // se chequea que ese numero inicial pedido sea valido. Se repetira el pedido si el numero es nulo, letras, fuera del rango de los dias del mes, o ya fue reservado previamente
-            while ( (eneInicial == "") || (eneInicial === null) || (Number.isNaN(Number(eneInicial))) || (eneInicial < 1 || eneInicial > 31) || (eneInicial >= eneInicialTotal && eneInicial <= eneFinalTotal)) {                  
-                alert(mensajeMalInicio);
-                eneInicial = Number.parseInt(prompt(mensajeInicio));
-            };
-
-            // se pide el numero de dia final a reservar
-            eneFinal = Number.parseInt(prompt(mensajeFin));
-
-            // se chequea que ese numero final sea valido. En este caso se suma tambien que el numero final ingresado debe ser mayor al inicial ingresado anteriormente.
-            while ( (eneFinal == "") || (eneFinal === null) || (Number.isNaN(Number(eneFinal))) || (eneFinal < 1 || eneFinal > 31) || (eneFinal < eneInicial) || (eneFinal >= eneInicialTotal && eneFinal <= eneFinalTotal)) {
-                alert(mensajeMalFinal);
-                eneFinal = Number.parseInt(prompt(mensajeFin));
-            };
-
-            // calculo del precio total, sumando 
-            reserva = ((eneFinal - eneInicial) * precio);
-            reservaTotal = (reserva + reservaTotal);
-            mensajeTotal = "\nTu estadia de Enero es por un total de $" + reservaTotal + ".";
-
-            // definicion de mensaje para alerta de Enero
-            mensajeReserva = "Reservaste tu estadia de " + (eneFinal - eneInicial) + ` dias desde el ${eneInicial} hasta el ${eneFinal} de ` + elegirMes + " por un total de $" + reserva + ".";      
-            mensajes(mensajeReserva,mensajeReserva);
-            mensajes(mensajeTotal,mensajeTotal);
-            break;
-        
-        // se repite todo lo mismo para febrero
-        case "febrero":
-            // se pide el numero de dia inicial a reservar
-            febInicial = Number.parseInt(prompt(mensajeInicio));
-            
-            // se chequea que ese numero inicial pedido sea valido. Se repetira el pedido si el numero es nulo, letras, fuera del rango de los dias del mes, o ya fue reservado previamente
-            while ( (febInicial == "") || (febInicial === null) || (Number.isNaN(Number(febInicial))) || (febInicial < 1 || febInicial > 28) || (febInicial >= febInicialTotal && febInicial <= febFinalTotal)) {
-                                
-                alert(mensajeMalInicio);
-                febInicial = Number.parseInt(prompt(mensajeInicio));
-            };
-
-            // se pide el numero de dia final a reservar
-            febFinal = Number.parseInt(prompt(mensajeFin));
-
-            // se chequea que ese numero final sea valido. En este caso se suma tambien que el numero final ingresado debe ser mayor al inicial ingresado anteriormente.
-            while ( (febFinal == "") || (febFinal === null) || (Number.isNaN(Number(febFinal))) || (febFinal < 1 || febFinal > 28) || (febFinal < febInicial) || (febFinal >= febInicialTotal && febFinal <= febFinalTotal)) {
-                alert(mensajeMalFinal);
-                febFinal = Number.parseInt(prompt(mensajeFin));
-            };
-
-            // calculo del precio total, sumando 
-            reserva = ((febFinal - febInicial) * precio);
-            reservaTotal = (reserva + reservaTotal);
-            mensajeTotal = "\nTu estadia de Febrero es por un total de $" + reservaTotal + ".";
-
-            // definicion de mensaje para alerta de Febrero
-            mensajeReserva = "Reservaste tu estadia de " + (febFinal - febInicial) + ` dias desde el ${febInicial} hasta el ${febFinal} de ` + elegirMes + " por un total de $" + reserva + ".";      
-            mensajes(mensajeReserva,mensajeReserva);
-            break;
-
-        default:
-            errorMes = elegirMes + " no es un mes valido. Por favor ingrese 'ENERO' o 'FEBRERO'."
-            mensajes(errorMes,errorMes);
-            break;
+    // Se reemplazo el switch por simples whiles, acortando el codigo a la mitad gracias al uso del array de objetos
+    // se piden dia inicial y final chequeando que sean validos segun la cantidad de dias de ese mes
+    let inicial = Number.parseInt(prompt(mensajeInicio));
+    while ( 
+            inicial === "" || 
+            inicial === null || 
+            Number.isNaN(Number(inicial)) || 
+            inicial < 1 ||
+            inicial > mes.dias ||
+            (inicial >= mes.inicialTotal && inicial <= mes.finalTotal)
+        ) {
+            alert(`El día de reserva inicial de ${mes.nombre} ingresado no es válido.`);
+            inicial = Number.parseInt(prompt(mensajeInicio));
     }
 
-    // Se define que el total de dias es igual a los dias que se han reservado durante esta funcion, para sus proximos usos y calcular que no esten ya reservados
-    eneInicialTotal = (eneInicial + eneInicialTotal);
-    eneFinalTotal = (eneFinal + eneFinalTotal);
-    febInicialTotal = (febInicial + febInicialTotal);
-    febFinalTotal = (febFinal + febFinalTotal);
+    let final = Number.parseInt(prompt(mensajeFin));
+    while (
+            final === "" ||
+            final === null ||
+            Number.isNaN(Number(final)) ||
+            final < 1 ||
+            final > mes.dias ||
+            final < inicial ||
+            (final >= mes.inicialTotal && final <= mes.finalTotal)
+        ) {
+            alert(`El día de reserva final de ${mes.nombre} ingresado no es válido.`);
+            final = Number.parseInt(prompt(mensajeFin));
+    }
+
+    // calculo del precio total. La reservaTotal suma todas las reservas hasta el momento.
+    let reserva = (final - inicial) * precio;
+    reservaTotal += reserva;
+
+    const mensajeReserva = `Reservaste tu estadía de ${final - inicial} días desde el ${inicial} hasta el ${final} de ${mes.nombre} por un total de $${reserva}.`;
+    const mensajeTotal = `\nTu estadia completa es por un total de $${reservaTotal}.`;
+    mensajes(mensajeReserva,mensajeReserva);
+    mensajes(mensajeTotal,mensajeTotal);
+
+    // Se define que el total de dias es igual a los dias que se han reservado antes durante bucles de esta funcion
+    mes.inicialTotal += inicial;
+    mes.finalTotal += final;
 }
 
 // Para los mensajes de consola y alertas, tipo echo
@@ -216,7 +237,7 @@ function mensajes(alerta,consola) {
 funcionMes ();
 
 // Despedida
-if (otraReserva == false) {
+if (otraReserva === false) {
     alert("¡Muchas gracias por elegirnos!\n  - VeranoFeel");
 } else {
     console.log("Reiniciando.")
