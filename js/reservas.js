@@ -37,7 +37,6 @@ document.getElementById("enviar").addEventListener("click", function (event) {
   let fechaDesde = parseInt(document.getElementById("fecha-desde").value.trim());
   let fechaHasta = parseInt(document.getElementById("fecha-hasta").value.trim());
   let mesSeleccionado = document.getElementById("select-mes").value;
-  let casaSeleccionada = document.getElementById("select-casa").value;
 
   // Chequeamos que todos los campos del formulario esten completos y sean validos.
   // Originalmente habia un solo if con un mensaje generico, pero lo separe aunque fuera mas codigo para poder identificar donde hay un problema
@@ -68,16 +67,14 @@ document.getElementById("enviar").addEventListener("click", function (event) {
 
   // Verificar si ya existe una reserva para el mes seleccionado
   const reservaExistente = reservasArray.find((reserva) => 
-    reserva.mesSeleccionado === mesSeleccionado && 
-    reserva.casaSeleccionada === casaSeleccionada
+    reserva.mesSeleccionado === mesSeleccionado 
   );
 
   // If que se ejecuta si reservaExistente es true por encontrar que hay reservas en el mes seleccionado con el .find anterior
   // Se comprueba si las fechas reservadas coinciden con las del formulario que escribio el usuario, es decir si intersectan
   if (reservaExistente) {
     const intersectanDias = reservasArray.some((reserva) =>
-        reserva.mesSeleccionado === mesSeleccionado && 
-        reserva.casaSeleccionada === casaSeleccionada &&
+        reserva.mesSeleccionado === mesSeleccionado &&
         ((fechaDesde <= reserva.fechaHasta && fechaHasta >= reserva.fechaDesde) || 
          (fechaHasta <= reserva.fechaHasta && fechaHasta >= reserva.fechaDesde))
       );
