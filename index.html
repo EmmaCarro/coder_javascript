@@ -133,7 +133,7 @@
                         Dos dormitorios, principal en suite con vestidor, y el otro con placard y baño completo.
                         </p>
                         <!-- ESTE BOTON EJECUTA EL SCRIPT PARA RESERVAS -->
-                        <a class="tarjeta__contenido--boton" href="">Reservar</a>
+                        <a id="reservar" class="tarjeta__contenido--boton" href="">Reservar</a>
                     </div>
                 </article>
 
@@ -151,10 +151,93 @@
                         Balcón/terraza con parrilla y una vista increíble al lago central.
                         </p>
                         <!-- ESTE BOTON EJECUTA EL SCRIPT PARA RESERVAS -->
-                        <a class="tarjeta__contenido--boton" href="">Reservar</a>
+                        <a id="reservar2" class="tarjeta__contenido--boton" href="">Reservar</a>
                     </div>
                 </article>
             </div>
+        </section>
+
+        <!-- FORMULARIO -->
+        <div id="fondoOscuro" class="fondo-oscuro" style="display: none;"></div>
+        <section id="contenedorFormulario" class="contenedor-formulario" style="display: none;">
+            <form id="formulario" class="formulario" style="display: none;">
+                <fieldset>
+                    <legend>¡Bienvenido a reservas VeranoFeel!<br/>Precio por noche: $8000</legend>
+
+                    <div>
+                        <label for="nombre">Nombre y apellido</label>
+                        <input id="nombres" type="text" name="nombre" placeholder="Nombres" />
+                        <input id="apellidos" type="text" name="apellido" placeholder="Apellidos" />
+                    </div>
+
+                    <div>
+                        <label for="email">Email</label>
+                        <input id="email" type="text" name="email" placeholder="Email" />
+                    </div>
+                    <div>
+                        <label for="telefono">Teléfono</label>
+                        <input id="telefono" type="number" name="telefono" placeholder="Telefono" />
+                    </div>
+
+                    <div>
+                        <label for="tipo">Alquiler de su interes:</label>
+                        <select id="select-casa" name="tipo">
+                            <option id="slect-kika" value="kika">Rancho Kika</option>
+                            <option id="select-rosita" value="rosita">Cabaña Rosita</option>
+                        </select>
+                    </div>
+
+                    <div>
+                        <label for="fecha">Fecha de interés:</label>
+                        <div>
+                            <select name="meses" id="select-mes">
+                                <option value="enero">Enero</option>
+                                <option value="febrero">Febrero</option>
+                                <option value="marzo">Marzo</option>
+                                <option value="abril">Abril</option>
+                                <option value="mayo">Mayo</option>
+                                <option value="junio">Junio</option>
+                                <option value="julio">Julio</option>
+                                <option value="agosto">Agosto</option>
+                                <option value="septiembre">Septiembre</option>
+                                <option value="octubre">Octubre</option>
+                                <option value="noviembre">Noviembre</option>
+                                <option value="diciembre">Diciembre</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label>desde</label>
+                            <input id="fecha-desde" type="number" name="fechadesde" />
+                            <label>hasta</label>
+                            <input id="fecha-hasta" type="number" name="fechahasta" placeholder="Hasta" />
+                        </div>
+                    </div>
+
+                    <div>
+                        <label for="adultos">Cantidad de adultos:</label>
+                        <div>
+                            <input id="adultos" type="number" name="adultos" placeholder="Adultos" />
+                        </div>
+                    </div>
+
+                    <div>
+                        <label for="ninios">Cantidad de niños:</label>
+                        <div>
+                            <input id="ninios" type="number" name="ninios" placeholder="Niños" />
+                        </div>
+                    </div>
+
+                    <div>
+                        <label for="mascotas">¿Lleva mascotas?</label>
+                        <input type="radio" name="mascotas" id="simascota" /><label for="simascota">Si</label>
+                        <input type="radio" name="mascotas" id="nomascota" checked="checked" /><label for="nomascota">No</label>
+                    </div>
+                    
+                    <button id="limpiar" type="reset">Limpiar formulario</button>
+                    <button id="enviar" class="tarjeta__contenido--boton" href="#">Enviar</button>
+
+                </fieldset>
+            </form>
         </section>
 
         <!-- SEPARADOR DISEÑO EN CIRCULOS CON PALABRAS -->
