@@ -1,27 +1,48 @@
-// Codigo completo recreado, porque sino era muy confuso. Se reemplazaron todos los alert y prompts con la interaccion con el formulario
+// Se reemplazo el localStorage por el uso de un .json teorico
 
 // Hacemos el formulario visible al clickear el boton "Reservar". El formulario se limpia al aparecer.
 document.getElementById("reservar").addEventListener("click", mostrarFormulario);
 document.getElementById("reservar2").addEventListener("click", mostrarFormulario);
 function mostrarFormulario(event) {
     event.preventDefault();
-    // const formulario = document.getElementById("formulario");
-    // formulario.reset();
     document.querySelector(".contenedor-formulario").style.display = "block";
     document.getElementById("formulario").style.display = "block";
     document.querySelector(".fondo-oscuro").style.display = "block";
   }
 
-// Definimos que la reserva es cero, pero la total incluye el precio de la primer noche reservada
+// Definimos la reserva inicial, y el precio por noche
 let nuevaReserva = 0;
 let reservaTotal = 0;
 const precio = 8000;
+let reservasArray = []; // Definimos el array vacio para reservas. 
 
-// Cargamos el array de reservas del localStorage. Y si no existe, se crea un array vacio nuevo.
-let reservasArray = JSON.parse(localStorage.getItem("reservas"));
-if (!Array.isArray(reservasArray)) {
-  reservasArray = [];
+// Se reemplazó el uso del localStorage con el servidor de pruebas json. 
+// No hay diferencia de funcionalidad, se guardan los datos hasta cerrar el html, porque para que los datos sean permanentes requerimos un backend que no tenemos
+// Se puede reemplazar el link al jsonplaceholder por un archivo local con un array vacio (solo corchetes "[]") sin embargo al no ser un servidor nos daria errores de CORS
+function obtenerReservasJSON() { // Funcion para obtener datos del JSON
+  return fetch('https://jsonplaceholder.typicode.com/posts')
+    .then(response => response.json())
+    .catch(() => {
+      return []; // Devuelve un array vacío en caso de error
+    });
 }
+
+function guardarReservasEnJSON() {  //Funcion para guardar datos en el JSON que usaremos en la logica global
+  fetch('https://jsonplaceholder.typicode.com/posts', {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(reservasArray),
+  });
+}
+
+obtenerReservasJSON()
+  .then(data => {
+    reservasArray = data;  // Cargamos los datos del archivo JSON. Y si no existe, se continua igual con un array vacio.
+  })
+  .then(() => {  //inicio de toda la logica global
+ 
 
 // Llamamos al boton "enviar" del formulario y hacemos que se ejecute todo cuando lo clickeamos
 document.getElementById("enviar").addEventListener("click", function (event) {
@@ -37,7 +58,6 @@ document.getElementById("enviar").addEventListener("click", function (event) {
   let fechaDesde = parseInt(document.getElementById("fecha-desde").value.trim());
   let fechaHasta = parseInt(document.getElementById("fecha-hasta").value.trim());
   let mesSeleccionado = document.getElementById("select-mes").value;
-  let casaSeleccionada = document.getElementById("select-casa").value;
 
   // Chequeamos que todos los campos del formulario esten completos y sean validos.
   // Originalmente habia un solo if con un mensaje generico, pero lo separe aunque fuera mas codigo para poder identificar donde hay un problema
@@ -68,16 +88,14 @@ document.getElementById("enviar").addEventListener("click", function (event) {
 
   // Verificar si ya existe una reserva para el mes seleccionado
   const reservaExistente = reservasArray.find((reserva) => 
-    reserva.mesSeleccionado === mesSeleccionado && 
-    reserva.casaSeleccionada === casaSeleccionada
+    reserva.mesSeleccionado === mesSeleccionado 
   );
 
   // If que se ejecuta si reservaExistente es true por encontrar que hay reservas en el mes seleccionado con el .find anterior
   // Se comprueba si las fechas reservadas coinciden con las del formulario que escribio el usuario, es decir si intersectan
   if (reservaExistente) {
     const intersectanDias = reservasArray.some((reserva) =>
-        reserva.mesSeleccionado === mesSeleccionado && 
-        reserva.casaSeleccionada === casaSeleccionada &&
+        reserva.mesSeleccionado === mesSeleccionado &&
         ((fechaDesde <= reserva.fechaHasta && fechaHasta >= reserva.fechaDesde) || 
          (fechaHasta <= reserva.fechaHasta && fechaHasta >= reserva.fechaDesde))
       );
@@ -89,18 +107,18 @@ document.getElementById("enviar").addEventListener("click", function (event) {
       }
   }
   
-  // Calcular el precio de la reserva
-  // Calculo del precio total. La reservaTotal suma todas las reservas hasta el momento. Y le agrego +precio una vez por reserva para que reserve el dia que le falta al calculo
+  // Calcular el precio de la reserva total. La reservaTotal suma todas las reservas hasta el momento. Y le agrego +precio una vez por reserva para que sume la ultima noche que omite el calculo de resta
   let nuevaReserva = precio + (fechaHasta - fechaDesde) * precio;
   reservaTotal += nuevaReserva;
 
   // Mostrar cartel de confirmación de reserva
   mostrarConfirmacion(nombres, fechaDesde, fechaHasta, reservaTotal);
 
-  // Agregar la nueva reserva al array de reservas y guardar en localStorage
+  // Agregar la nueva reserva al array de reservas y guardar en el archivo .json
   reservasArray.push({mesSeleccionado, fechaDesde, fechaHasta});
-  localStorage.setItem("reservas", JSON.stringify(reservasArray));
+  guardarReservasEnJSON()
   });
+}); //fin de la logica global
 
 // Funcion para obtener el numero maximo de dias de cada mes, para el chequeo correcto de "fechaDesde" y "fechaHasta". Lo hice con un else if porque ocupaba menos caracteres que un switch
 // Destructuracion del if para acortar aun mas el codigo
@@ -120,8 +138,8 @@ function cerrarCartel() {
   carteles.forEach(carte => carte.remove());
 }
 
-// Para crear una ventana de error con un "mensaje" customizado
-//el style="white-space: pre-line;" fuerza a que nos de bola el uso de "\n" saltos de linea en el texto del mensaje... porque no queria andar
+// Para crear una ventana de error con un "mensaje" customizado. Lo mantuve en vez de reemplazarlo por un SweetAlert, para tener ambos metodos incluidos en el proyecto.
+//el style="white-space: pre-line;" fuerza a que funcione el uso de "\n"
 function mostrarError(mensaje) {
     const errorDiv = document.createElement("div");
     errorDiv.className = "alert alert-danger";
@@ -145,7 +163,27 @@ function cerrarTodo() {
   document.getElementById("formulario").style.display = "none";
   document.querySelector(".fondo-oscuro").style.display = "none";
 }
-// Funcion para crear cartel de confirmacion al crear una reserva correctamente
+
+// Funcion asincronica para utilizar el toast. El toast elegido usaba "await" y tiene el "timer" integrado, por lo que preferi utilizar async en vez del metodo new promise
+async function ejecutarToast() {
+  const Toast = Swal.mixin({ // Llamamos a un toast de la libreria SweetAlert2
+    toast: true,
+    position: 'bottom-right',
+    iconColor: 'white',
+    customClass: {
+      popup: 'colored-toast'
+    },
+    showConfirmButton: false,
+    timer: 3000,  //le damos un poco mas de tiempo en pantalla que 1500
+    timerProgressBar: true
+  })
+  await Toast.fire({
+    icon: 'success',
+    title: 'Reserva registrada!'  //modificamos el mensaje
+  })
+}
+  
+// Funcion para crear cartel de confirmacion al crear una reserva correctamente. Lo mantuve en vez de reemplazarlo por un SweetAlert, para tener ambos metodos incluidos en el proyecto.
 function mostrarConfirmacion(nombres, fechaDesde, fechaHasta, reservaTotal) {
   let mesArreglo = document.getElementById("select-mes").value.toUpperCase();
   const confirmacionDiv = document.createElement("div");
@@ -163,4 +201,6 @@ function mostrarConfirmacion(nombres, fechaDesde, fechaHasta, reservaTotal) {
   `;
   document.body.appendChild(confirmacionDiv);
   console.log(`Se realizo una reserva desde el ${fechaDesde} hasta el ${fechaHasta} de ${mesArreglo}, y el total hasta ahora es $${reservaTotal}`)
+  ejecutarToast();  //llamamos al toast de sweetalert2
 }
+ 

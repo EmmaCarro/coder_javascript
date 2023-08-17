@@ -840,3 +840,8 @@ footer {
     bottom: 8vh; }
   .container-fluid:after {
     bottom: 5vh; } }
+
+  /* Toast de SweetAlert2 */
+  .colored-toast.swal2-icon-success {
+    background-color: #8bdb96 !important;
+  }
